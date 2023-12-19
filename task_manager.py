@@ -4,27 +4,27 @@ import os
 class DziennikZajec:
     def __init__(self, filename='journal.json'):
         self.filename = filename
-        self.journal = self.read_journal()  # Poprawione: 'tasks' na 'journal'
+        self.journal = self.read_journal()
     
     def read_journal(self):
         journal = []
         try:
             if os.path.exists(self.filename):
                 with open(self.filename, 'r') as file:
-                    journal = json.load(file)  # Poprawione: 'journal.load' na 'json.load'
+                    journal = json.load(file)
         except FileNotFoundError:
             print("Wystąpił błąd! Nie odnaleziono pliku!")
         return journal
     
     def save_to_file(self):
         try:
-            with open(self.filename, 'w') as file:  # Poprawione: 'r' na 'w'
+            with open(self.filename, 'w') as file:
                 json.dump(self.journal, file)
         except FileNotFoundError:
             print("Plik nie istnieje")
     
     def add_task(self, task):
-        self.journal.append(task)  # Poprawione: 'task' na 'journal'
+        self.journal.append(task)
         self.save_to_file()
         print("Zadanie zapisane w pliku!")
     
@@ -35,7 +35,7 @@ class DziennikZajec:
                 self.save_to_file()
                 print("Zadanie zedytowane poprawnie!")
             else:
-                raise ValueError("Zadanie o takim numerze nie istnieje!")  # Poprawione: Wyjątek ValueError
+                raise ValueError("Zadanie o takim numerze nie istnieje!")
         except ValueError as e:
             print(f"Błąd: {e}")
     
@@ -46,7 +46,7 @@ class DziennikZajec:
                 self.save_to_file()
                 print("Zadanie usunięte!")
             else:
-                raise ValueError("Zadanie o takim numerze nie istnieje!")  # Poprawione: Wyjątek ValueError
+                raise ValueError("Zadanie o takim numerze nie istnieje!")  
         except ValueError as e:
             print(f"Błąd: {e}")
 
@@ -59,7 +59,7 @@ def menu():
     print("5. Odczytaj zadania z pliku")
     print("6. Wyjdź")
 
-def perform_actions(tasks_manager, action):  # Poprawione: Przekazanie tasks_manager jako argumentu
+def perform_actions(tasks_manager, action):
     if action == 1:
         task_content = input("Podaj treść zadania: ")
         tasks_manager.add_task(task_content)
@@ -84,7 +84,7 @@ def perform_actions(tasks_manager, action):  # Poprawione: Przekazanie tasks_man
         print("Zadania odczytane z pliku.")
 
 if __name__ == "__main__":
-    tasks_manager = DziennikZajec()  # Poprawione: Utworzenie instancji klasy DziennikZajec
+    tasks_manager = DziennikZajec()
 
     while True:
         menu()
@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
         try:
             action = int(choice)
-            if 1 <= action <= 6:  # Poprawione: '5' na '6'
+            if 1 <= action <= 6:
                 perform_actions(tasks_manager, action)
             else:
                 print("Niepoprawny numer!")
