@@ -34,21 +34,17 @@ class DziennikZajec:
                 self.journal[number] = new_task
                 self.save_to_file()
                 print("Zadanie zedytowane poprawnie!")
-            else:
-                raise ValueError("Zadanie o takim numerze nie istnieje!")
-        except ValueError as e:
-            print(f"Błąd: {e}")
+        except ValueError:
+            print("Zadanie o takim numerze nie istnieje!")
     
     def remove_task(self, number):
         try:
             if 0 <= number < len(self.journal):
                 removed_task = self.journal.pop(number)
                 self.save_to_file()
-                print("Zadanie usunięte!")
-            else:
-                raise ValueError("Zadanie o takim numerze nie istnieje!")  
-        except ValueError as e:
-            print(f"Błąd: {e}")
+                print("Zadanie usunięte!")  
+        except ValueError:
+            print("Zadanie o takim numerze nie istnieje!")
 
 def menu():
     print("\n Lista Zadań")
